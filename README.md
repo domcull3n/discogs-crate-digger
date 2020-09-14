@@ -51,7 +51,7 @@ Use exact searches to perform the following replacements throughout this project
 1. Replace my name with yours: `Dominic Cullen`
 2. Replace my website URL with yours: ``
 3. Replace my *GitHub* username and project name with yours: `domcull3n/discogs-crate-digger`
-4. Replace my *NPM* project name with yours: `discogs-crate-digger`
+4. Replace my *NPM* project name with yours: `typescript-template`
 5. Update [package.json](package.json):
 	* Change `description` to suit your project.
 	* Update the `keywords` list.
@@ -109,8 +109,8 @@ Follow these steps to update your NPM package:
 This section is here as a reminder for you to explain to your users how to contribute to the projects you create from this template.
 
 [project-url]: https://github.com/domcull3n/discogs-crate-digger
-[package-image]: https://badge.fury.io/js/discogs-crate-digger.svg
-[package-url]: https://badge.fury.io/js/discogs-crate-digger
+[package-image]: https://badge.fury.io/js/typescript-template.svg
+[package-url]: https://badge.fury.io/js/typescript-template
 [issues-image]: https://img.shields.io/github/issues/domcull3n/discogs-crate-digger.svg?style=popout
 [issues-url]: https://github.com/domcull3n/discogs-crate-digger/issues
 [build-image]: https://travis-ci.org/domcull3n/discogs-crate-digger.svg?branch=master

@@ -1,22 +1,22 @@
-'use strict';
+// import { DiscogsClient } from './discogs/client';
+// import { Inventory } from './discogs/models/marketplace';
+// // import { Logger } from 'sitka';
 
-import { Logger } from 'sitka';
+// export class Example {
+// 	/* Private Instance Fields */
 
-export class Example {
-	/* Private Instance Fields */
+// 	// private _logger: Logger;
 
-	private _logger: Logger;
+// 	/* Constructor */
 
-	/* Constructor */
+// 	constructor() {
+// 		// this._logger = Logger.getLogger({ name: this.constructor.name });
+// 	}
 
-	constructor() {
-		this._logger = Logger.getLogger({ name: this.constructor.name });
-	}
+// 	/* Public Instance Methods */
 
-	/* Public Instance Methods */
-
-	public exampleMethod(param: string): string {
-		this._logger.debug('Received: ' + param);
-		return param;
-	}
-}
+// 	public async exampleMethod(): Promise<Inventory> {
+// 		const discogsClient = new DiscogsClient()
+// 		return discogsClient.getInventory('crazybeatrecords');
+// 	}
+// }

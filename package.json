@@ -29,10 +29,11 @@
     "cover:check": "nyc --check-coverage npm run test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "tslint src/**/*.ts test/**/*.ts",
+    "lint:fix": "tslint --fix -c tslint.json '{src,test}/**/*{.ts}'",
     "preversion": "npm run build && npm run cover:check",
     "postversion": "git push && git push --tags",
     "prepare": "npm run build",
-    "test": "mocha",
+    "test": "mocha -r ts-node/register 'test/**/*.ts'",
     "upgrade": "npx npm-check -u",
     "version": "npm run build && npm run changelog:update"
   },
@@ -57,7 +58,8 @@
     }
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
     "sitka": "^1.0.5"
   }
 }

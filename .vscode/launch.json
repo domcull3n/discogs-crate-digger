@@ -17,19 +17,6 @@
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen",
 			"protocol": "inspector"
-		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Mocha Run All",
-			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-			"args": [
-				"-r",
-				"ts-node/register",
-				"--colors",
-				"${workspaceFolder}/test/**/*-spec.ts"
-			],
-			"console": "integratedTerminal",
 		}
 	]
   }

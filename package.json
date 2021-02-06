@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "base64url": "^3.0.1",
     "dotenv": "^8.2.0",
     "sitka": "^1.0.5"
   }

@@ -15,6 +15,9 @@
     "url": "https://github.com/domcull3n/discogs-crate-digger.git"
   },
   "main": "dist/index.js",
+  "bin": {
+    "discogs-crate-digger": "./dist/index.js"
+  },
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
@@ -62,9 +65,11 @@
   "dependencies": {
     "axios": "^0.21.0",
     "base64url": "^3.0.1",
+    "commander": "^7.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "open": "^7.4.0",
+    "path": "^0.12.7",
     "sitka": "^1.0.5"
   }
 }

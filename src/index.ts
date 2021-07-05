@@ -6,12 +6,12 @@ import { Command } from 'commander';
 
 const program = new Command();
 program
-	.arguments('<username>')
-	.description('discogs-crate-digger', {
-		username: 'the marketplace user you want to dig through'
-	})
-	.action((username) => {
-		
-	});
+    .arguments('<username>')
+    .description('discogs-crate-digger', {
+        username: 'the marketplace user you want to dig through',
+    })
+    .action((username: string) => {
+        console.log(username);
+    });
 
 program.parse();

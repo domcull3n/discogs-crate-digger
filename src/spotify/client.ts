@@ -4,26 +4,26 @@ import { SearchResponse, Track } from './models/search';
 import { CurrentUserResponse } from './models/user';
 
 export default class SpotifyClient {
-
-    private _axios: AxiosInstance;
+    private axios: AxiosInstance;
 
     constructor(token: string) {
-        this._axios = axios.create({
+        this.axios = axios.create({
             baseURL: 'https://accounts.spotify.com',
             timeout: 5000,
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-        this._axios.interceptors.response.use((res) => res.data)
+            headers: { authorization: `Bearer ${token}` },
+        });
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        this.axios.interceptors.response.use((res) => res.data);
     }
 
     async getCurrentUser(): Promise<CurrentUserResponse> {
         const config: AxiosRequestConfig = {
             baseURL: 'https://api.spotify.com',
             url: '/v1/me',
-            method: 'get'
-        }
+            method: 'get',
+        };
 
-        return this._axios.request<CurrentUserResponse, CurrentUserResponse>(config)
+        return this.axios.request<CurrentUserResponse, CurrentUserResponse>(config);
     }
 
     async createPlaylist(user: string, playlistName: string): Promise<CreatePlaylistResponse> {
@@ -31,36 +31,35 @@ export default class SpotifyClient {
             collaborative: false,
             name: playlistName,
             description: `Description of ${playlistName}`,
-            public: false
-        }
+            public: false,
+        };
 
         const config: AxiosRequestConfig = {
             url: `/v1/users/${user}/playlists`,
             method: 'post',
-            params: request
-        }
+            params: request,
+        };
 
-        return this._axios.request<CreatePlaylistResponse, CreatePlaylistResponse>(config)
+        return this.axios.request<CreatePlaylistResponse, CreatePlaylistResponse>(config);
     }
 
     async addItemsToPlaylist(playlistId: string, tracks: string[]): Promise<AddItemsToPlaylistResponse> {
         const config: AxiosRequestConfig = {
             url: `/v1/playlists/${playlistId}/tracks`,
             method: 'post',
-            params: { uris: tracks }
-        }
+            params: { uris: tracks },
+        };
 
-        return this._axios.request<AddItemsToPlaylistResponse, AddItemsToPlaylistResponse>(config)
+        return this.axios.request<AddItemsToPlaylistResponse, AddItemsToPlaylistResponse>(config);
     }
 
     async searchForTrack(search: string): Promise<SearchResponse<Track>> {
         const config: AxiosRequestConfig = {
             url: '/v1/search',
             method: 'get',
-            params: { q: search }
-        }
+            params: { q: search },
+        };
 
-        return this._axios.request<SearchResponse<Track>, SearchResponse<Track>>(config)
+        return this.axios.request<SearchResponse<Track>, SearchResponse<Track>>(config);
     }
-
 }

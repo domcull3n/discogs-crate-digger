@@ -3,25 +3,27 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { discogsApiKey } from '../config';
 
 export default class DiscogsClient {
-
-    private _axios: AxiosInstance;
+    private axios: AxiosInstance;
 
     constructor() {
-        this._axios = axios.create({
+        this.axios = axios.create({
             baseURL: 'https://api.discogs.com',
             timeout: 5000,
-            headers: { 'User-Agent': 'discogs-crate-digger:0.1', 'Authorization': discogsApiKey }
-        })
-        this._axios.interceptors.response.use((res) => res.data)
+            headers: {
+                'User-Agent': 'discogs-crate-digger:0.1',
+                Authorization: discogsApiKey,
+            },
+        });
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        this.axios.interceptors.response.use((res) => res.data);
     }
 
-    async getInventory(username: string) : Promise<Inventory> {
+    async getInventory(username: string): Promise<Inventory> {
         const config: AxiosRequestConfig = {
             url: `/users/${username}/inventory`,
-            method: 'get'
-        }
+            method: 'get',
+        };
 
-        return this._axios.request<Inventory, Inventory>(config)
+        return this.axios.request<Inventory, Inventory>(config);
     }
-
 }

@@ -15,6 +15,7 @@ export interface SearchRequest {
 
 export interface SearchResponse<T> {
     tracks?: PagingWrapper<T>;
+    albums?: PagingWrapper<T>;
 }
 
 interface PagingWrapper<T> {

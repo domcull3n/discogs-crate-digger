@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Album } from './models/album';
 import { AddItemsToPlaylistResponse, CreatePlaylistRequest, CreatePlaylistResponse } from './models/playlists';
 import { SearchResponse, Track } from './models/search';
 import { CurrentUserResponse } from './models/user';
@@ -13,7 +15,7 @@ export default class SpotifyClient {
             headers: { authorization: `Bearer ${token}` },
         });
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        this.axios.interceptors.response.use((res) => res.data);
+        this.axios.interceptors.response.use(res => res.data, err => console.log(err?.response));
     }
 
     async getCurrentUser(): Promise<CurrentUserResponse> {
@@ -56,9 +58,18 @@ export default class SpotifyClient {
         const config: AxiosRequestConfig = {
             url: '/v1/search',
             method: 'get',
-            params: { q: search },
+            params: { q: search, type: 'album' },
         };
 
         return this.axios.request<SearchResponse<Track>, SearchResponse<Track>>(config);
+    }
+
+    async getAlbum(albumId: string): Promise<Album> {
+        const config: AxiosRequestConfig = {
+            url: `/v1/albums/${albumId}`,
+            method: 'get',
+        };
+
+        return this.axios.request<Album, Album>(config);
     }
 }

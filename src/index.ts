@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
 // import path from 'path';
-// import index from './callback/index';
+import index from './callback/index';
 import { Command } from 'commander';
-import Service from './service';
 
 const program = new Command();
-const service = new Service();
 
 program
     .arguments('<username>')
@@ -14,8 +12,7 @@ program
         username: 'the marketplace user you want to dig through',
     })
     .action((username: string) => {
-        const inventory = service.run(username);
-        void inventory.then((res) => console.log(res));
+        index(username);
     });
 
 program.parse();

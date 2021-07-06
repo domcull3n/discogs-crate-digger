@@ -8,7 +8,7 @@ export default class SpotifyClient {
 
     constructor(token: string) {
         this.axios = axios.create({
-            baseURL: 'https://accounts.spotify.com',
+            baseURL: 'https://api.spotify.com',
             timeout: 5000,
             headers: { authorization: `Bearer ${token}` },
         });
@@ -18,7 +18,6 @@ export default class SpotifyClient {
 
     async getCurrentUser(): Promise<CurrentUserResponse> {
         const config: AxiosRequestConfig = {
-            baseURL: 'https://api.spotify.com',
             url: '/v1/me',
             method: 'get',
         };
@@ -37,7 +36,7 @@ export default class SpotifyClient {
         const config: AxiosRequestConfig = {
             url: `/v1/users/${user}/playlists`,
             method: 'post',
-            params: request,
+            data: request,
         };
 
         return this.axios.request<CreatePlaylistResponse, CreatePlaylistResponse>(config);
@@ -47,7 +46,7 @@ export default class SpotifyClient {
         const config: AxiosRequestConfig = {
             url: `/v1/playlists/${playlistId}/tracks`,
             method: 'post',
-            params: { uris: tracks },
+            data: { uris: tracks },
         };
 
         return this.axios.request<AddItemsToPlaylistResponse, AddItemsToPlaylistResponse>(config);

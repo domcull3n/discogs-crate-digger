@@ -14,8 +14,12 @@ export default class DiscogsClient {
                 Authorization: discogsApiKey,
             },
         });
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        this.axios.interceptors.response.use((res) => res.data);
+        this.axios.interceptors.response.use(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+            (res) => res.data,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            (err) => console.log(err.response),
+        );
     }
 
     async getInventory(username: string): Promise<Inventory> {

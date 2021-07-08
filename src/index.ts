@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// import path from 'path';
 import index from './callback/index';
 import { Command } from 'commander';
 

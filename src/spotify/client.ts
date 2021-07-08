@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Album } from './models/album';
 import { AddItemsToPlaylistResponse, CreatePlaylistRequest, CreatePlaylistResponse } from './models/playlists';
@@ -14,8 +13,12 @@ export default class SpotifyClient {
             timeout: 5000,
             headers: { authorization: `Bearer ${token}` },
         });
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        this.axios.interceptors.response.use(res => res.data, err => console.log(err?.response));
+        this.axios.interceptors.response.use(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+            (res) => res.data,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            (err) => console.log(err.response),
+        );
     }
 
     async getCurrentUser(): Promise<CurrentUserResponse> {

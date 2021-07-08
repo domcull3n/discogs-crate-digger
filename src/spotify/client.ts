@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Album } from './models/album';
+import { GetAlbumResponse } from './models/album';
 import { AddItemsToPlaylistResponse, CreatePlaylistRequest, CreatePlaylistResponse } from './models/playlists';
 import { SearchResponse, Track } from './models/search';
 import { CurrentUserResponse } from './models/user';
@@ -67,12 +67,12 @@ export default class SpotifyClient {
         return this.axios.request<SearchResponse<Track>, SearchResponse<Track>>(config);
     }
 
-    async getAlbum(albumId: string): Promise<Album> {
+    async getAlbum(albumId: string): Promise<GetAlbumResponse> {
         const config: AxiosRequestConfig = {
             url: `/v1/albums/${albumId}`,
             method: 'get',
         };
 
-        return this.axios.request<Album, Album>(config);
+        return this.axios.request<GetAlbumResponse, GetAlbumResponse>(config);
     }
 }

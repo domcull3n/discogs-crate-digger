@@ -1,6 +1,5 @@
 import { Inventory } from './models/marketplace';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { discogsApiKey } from '../config';
 
 export default class DiscogsClient {
     private axios: AxiosInstance;
@@ -10,8 +9,7 @@ export default class DiscogsClient {
             baseURL: 'https://api.discogs.com',
             timeout: 5000,
             headers: {
-                'User-Agent': 'discogs-crate-digger:0.1',
-                Authorization: discogsApiKey,
+                'User-Agent': 'discogs-crate-digger:0.1'
             },
         });
         this.axios.interceptors.response.use(

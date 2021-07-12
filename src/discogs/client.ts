@@ -9,7 +9,7 @@ export default class DiscogsClient {
             baseURL: 'https://api.discogs.com',
             timeout: 5000,
             headers: {
-                'User-Agent': 'discogs-crate-digger:0.1'
+                'User-Agent': 'discogs-crate-digger:0.1',
             },
         });
         this.axios.interceptors.response.use(

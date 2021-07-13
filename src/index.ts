@@ -11,7 +11,11 @@ program
         username: 'the marketplace user you want to dig through',
     })
     .action((username: string) => {
-        index(username);
+        try {
+            index(username);
+        } catch (error) {
+            console.log('an error has occured, please try again later.');
+        }
     });
 
-program.parse();
+program.parse(process.argv);

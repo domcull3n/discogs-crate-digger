@@ -22,7 +22,16 @@ export default (username: string): void => {
             const token = req.query.access_token?.toString();
             if (token) {
                 const service = new Service(token);
-                void service.run(username);
+                void service
+                    .run(username)
+                    .then(() => {
+                        console.log(`finished processing playlist for ${username} discogs marketplace`);
+                        process.exit(0);
+                    })
+                    .catch(() => {
+                        console.log('an error has occured, please try again later');
+                        process.exit(1);
+                    });
             }
         });
 

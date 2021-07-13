@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Inventory } from './models/marketplace';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
@@ -15,8 +16,6 @@ export default class DiscogsClient {
         this.axios.interceptors.response.use(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             (res) => res.data,
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            (err) => console.log(err.response),
         );
     }
 
@@ -26,6 +25,8 @@ export default class DiscogsClient {
             method: 'get',
         };
 
-        return this.axios.request<Inventory, Inventory>(config);
+        return this.axios.request<Inventory, Inventory>(config).catch(() => {
+            throw Error('Discogs API Error');
+        });
     }
 }

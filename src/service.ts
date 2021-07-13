@@ -12,8 +12,8 @@ export default class Service {
     }
 
     async run(discogsUsername: string): Promise<void> {
-        const playlist = await this.createPlaylist(discogsUsername);
         const inventory = await this.discogsClient.getInventory(discogsUsername);
+        const playlist = await this.createPlaylist(discogsUsername);
 
         for (const listing of inventory.listings) {
             console.log(`searching for ${listing.release.title} by ${listing.release.artist}`);
@@ -29,8 +29,6 @@ export default class Service {
                 );
             }
         }
-
-        console.log('done processing');
     }
 
     async createPlaylist(discogsUsername: string): Promise<CreatePlaylistResponse> {

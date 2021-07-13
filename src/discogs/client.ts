@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Inventory } from './models/marketplace';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { discogsApiKey } from '../config';
 
 export default class DiscogsClient {
     private axios: AxiosInstance;
@@ -11,14 +11,11 @@ export default class DiscogsClient {
             timeout: 5000,
             headers: {
                 'User-Agent': 'discogs-crate-digger:0.1',
-                Authorization: discogsApiKey,
             },
         });
         this.axios.interceptors.response.use(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             (res) => res.data,
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            (err) => console.log(err.response),
         );
     }
 
@@ -28,6 +25,8 @@ export default class DiscogsClient {
             method: 'get',
         };
 
-        return this.axios.request<Inventory, Inventory>(config);
+        return this.axios.request<Inventory, Inventory>(config).catch(() => {
+            throw Error('Discogs API Error');
+        });
     }
 }

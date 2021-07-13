@@ -1,6 +1,1 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-
-export const discogsApiKey: string | undefined = process.env.DISCOGS_API_KEY;
-export const spotifyClientId: string | undefined = process.env.SPOTIFY_CLIENT_ID;
+export const spotifyClientId = 'a937143b2e414b9b8d32c9937851234f';

@@ -1,4 +1,4 @@
-# Node.js TypeScript Template
+# Discogs Crate Digger
 
 [![Package Version][package-image]][package-url]
 [![Open Issues][issues-image]][issues-url]

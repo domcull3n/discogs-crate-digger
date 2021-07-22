@@ -12,7 +12,7 @@ export interface Inventory {
     listings: Listing[];
 }
 
-interface Listing {
+export interface Listing {
     release: Release;
 }
 

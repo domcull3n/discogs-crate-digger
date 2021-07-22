@@ -12,7 +12,7 @@ program
     })
     .action((username: string) => {
         try {
-            index(username);
+            index(username.toLowerCase());
         } catch (error) {
             console.log('an error has occured, please try again later.');
         }

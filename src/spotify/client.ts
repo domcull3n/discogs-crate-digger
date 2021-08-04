@@ -10,7 +10,6 @@ export default class SpotifyClient {
     constructor(token: string) {
         this.axios = axios.create({
             baseURL: 'https://api.spotify.com',
-            timeout: 5000,
             headers: { authorization: `Bearer ${token}` },
         });
         this.axios.interceptors.response.use(

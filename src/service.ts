@@ -29,7 +29,7 @@ export default class Service {
         if (spotifyTrack.albums?.items.length === 1) {
             console.log(`retrieving album ${listing.release.title}`);
             const album = await this.spotifyClient.getAlbum(spotifyTrack.albums?.items[0].id);
-            void this.spotifyClient.addItemsToPlaylist(
+            await this.spotifyClient.addItemsToPlaylist(
                 playlist.id,
                 album.tracks.items.map((i) => i.uri),
             );

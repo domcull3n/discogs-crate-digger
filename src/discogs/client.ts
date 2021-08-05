@@ -19,10 +19,11 @@ export default class DiscogsClient {
         );
     }
 
-    async getInventory(username: string): Promise<Inventory> {
+    async getInventory(username: string, page: number): Promise<Inventory> {
         const config: AxiosRequestConfig = {
             url: `/users/${username}/inventory`,
             method: 'get',
+            params: { page, per_page: 100 },
         };
 
         return this.axios.request<Inventory, Inventory>(config).catch(() => {

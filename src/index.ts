@@ -14,7 +14,7 @@ program
         try {
             index(username.toLowerCase());
         } catch (error) {
-            console.log('an error has occured, please try again later.');
+            console.log(error);
         }
     });
 

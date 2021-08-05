@@ -13,12 +13,20 @@ export default class Service {
     }
 
     async run(discogsUsername: string): Promise<void> {
-        const inventory = await this.discogsClient.getInventory(discogsUsername);
         const playlist = await this.createPlaylist(discogsUsername);
+        await this.iterateInventory(discogsUsername, playlist, 0);
+    }
+
+    async iterateInventory(discogsUsername: string, playlist: CreatePlaylistResponse, page: number): Promise<void> {
+        const inventory = await this.discogsClient.getInventory(discogsUsername, page);
 
         await Promise.all(
             inventory.listings.map((listing) => this.addTracksFromListingIntoPlaylist(listing, playlist)),
         );
+
+        if (inventory.pagination.page <= inventory.pagination.pages) {
+            await this.iterateInventory(discogsUsername, playlist, inventory.pagination.page + 1);
+        }
     }
 
     async addTracksFromListingIntoPlaylist(listing: Listing, playlist: CreatePlaylistResponse): Promise<void> {
@@ -26,7 +34,7 @@ export default class Service {
         const spotifyTrack = await this.spotifyClient.searchForTrack(
             `${listing.release.artist} ${listing.release.title}`,
         );
-        if (spotifyTrack.albums?.items.length === 1) {
+        if (spotifyTrack && spotifyTrack.albums?.items.length === 1) {
             console.log(`retrieving album ${listing.release.title}`);
             const album = await this.spotifyClient.getAlbum(spotifyTrack.albums?.items[0].id);
             await this.spotifyClient.addItemsToPlaylist(

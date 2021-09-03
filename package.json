@@ -20,7 +20,7 @@
     "main": "dist/index.js",
     "bin": {
         "discogs-crate-digger": "./dist/index.js",
-        "dcg": "./dist/index.js"
+        "dcd": "./dist/index.js"
     },
     "types": "dist/index.d.ts",
     "files": [

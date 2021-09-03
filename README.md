@@ -6,15 +6,24 @@
 [![Coverage Status][coverage-image]][coverage-url]
 
 ## Installation
+
 ```bash
 npm install -g discogs-crate-digger
-``` 
+```
 
 ## Usage
+
 When using the command it will trigger an oauth flow with spotify asking for access to create a playlist on your behalf
+
 ```bash
 discogs-crate-digger <username>
-``` 
+```
+
+or
+
+```bash
+dcg <username>
+```
 
 [project-url]: https://github.com/domcull3n/discogs-crate-digger
 [package-image]: https://badge.fury.io/js/discogs-crate-digger.svg

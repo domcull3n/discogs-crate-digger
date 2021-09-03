@@ -28,9 +28,8 @@ export default (username: string): void => {
                         console.log(`finished processing playlist for ${username} discogs marketplace`);
                         process.exit(0);
                     })
-                    .catch((err) => {
-                        console.log('error at app.get level');
-                        console.log(err);
+                    .catch(() => {
+                        console.log('an error has occured, please try again later');
                         process.exit(1);
                     });
             }

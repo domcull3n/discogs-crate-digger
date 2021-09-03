@@ -3,7 +3,10 @@
     "version": "1.0.4",
     "description": "",
     "keywords": [
-        "typescript"
+        "typescript",
+        "discogs",
+        "cli",
+        "spotify"
     ],
     "author": {
         "name": "Dominic Cullen",
@@ -16,7 +19,8 @@
     },
     "main": "dist/index.js",
     "bin": {
-        "discogs-crate-digger": "./dist/index.js"
+        "discogs-crate-digger": "./dist/index.js",
+        "dcg": "./dist/index.js"
     },
     "types": "dist/index.d.ts",
     "files": [

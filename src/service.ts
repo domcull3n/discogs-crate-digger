@@ -14,17 +14,17 @@ export default class Service {
 
     async run(discogsUsername: string): Promise<void> {
         const playlist = await this.createPlaylist(discogsUsername);
-        await this.iterateInventory(discogsUsername, playlist, 0);
+        await this.iterateInventory(discogsUsername, playlist, 1);
     }
 
     async iterateInventory(discogsUsername: string, playlist: CreatePlaylistResponse, page: number): Promise<void> {
         const inventory = await this.discogsClient.getInventory(discogsUsername, page);
 
-        await Promise.all(
-            inventory.listings.map((listing) => this.addTracksFromListingIntoPlaylist(listing, playlist)),
-        );
+        for (const listing of inventory.listings) {
+            void (await this.addTracksFromListingIntoPlaylist(listing, playlist));
+        }
 
-        if (inventory.pagination.page <= inventory.pagination.pages) {
+        if (page < inventory.pagination.pages) {
             await this.iterateInventory(discogsUsername, playlist, inventory.pagination.page + 1);
         }
     }

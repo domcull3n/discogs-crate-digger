@@ -18,17 +18,11 @@ export default class SpotifyClient {
             retry: 1,
             retryDelay: 60000,
             backoffType: 'static',
-            onRetryAttempt: (err) => {
-                console.log('THIS IS RETRYING');
-                console.log(err.code);
-            },
         };
         rax.attach(this.axios);
         this.axios.interceptors.response.use(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             (res) => res.data,
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            (err) => console.log(err.response),
         );
     }
 

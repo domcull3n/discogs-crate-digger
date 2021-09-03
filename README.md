@@ -22,7 +22,7 @@ discogs-crate-digger <username>
 or
 
 ```bash
-dcg <username>
+dcd <username>
 ```
 
 [project-url]: https://github.com/domcull3n/discogs-crate-digger

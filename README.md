@@ -27,7 +27,7 @@ dcd <username>
 
 [project-url]: https://github.com/domcull3n/discogs-crate-digger
 [package-image]: https://badge.fury.io/js/discogs-crate-digger.svg
-[package-url]: https://badge.fury.io/js/typescript-template
+[package-url]: https://badge.fury.io/js/discogs-crate-digger
 [issues-image]: https://img.shields.io/github/issues/domcull3n/discogs-crate-digger.svg?style=popout
 [issues-url]: https://github.com/domcull3n/discogs-crate-digger/issues
 [build-image]: https://travis-ci.org/domcull3n/discogs-crate-digger.svg?branch=master

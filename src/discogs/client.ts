@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Inventory } from './models/marketplace';
+import { MarketplaceInventory } from './models/marketplace';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import * as rax from 'retry-axios';
+import { CollectionInventory } from './models/collection';
+import { Inventory } from './models/generic';
+import { InventoryType } from '../models';
 
 export default class DiscogsClient {
     private axios: AxiosInstance;
@@ -27,13 +30,50 @@ export default class DiscogsClient {
         );
     }
 
-    async getInventory(username: string, page: number): Promise<Inventory> {
+    async getInventory(username: string, inventoryType: InventoryType, page: number): Promise<Inventory> {
+        switch (inventoryType) {
+            case InventoryType.MARKETPLACE:
+                return this.getMarketplaceInventory(username, page);
+            case InventoryType.COLLECTION:
+                return this.getCollection(username, page);
+        }
+    }
+
+    async getMarketplaceInventory(username: string, page: number): Promise<Inventory> {
         const config: AxiosRequestConfig = {
             url: `/users/${username}/inventory`,
             method: 'get',
             params: { page, per_page: 100 },
         };
 
-        return this.axios.request<Inventory, Inventory>(config);
+        const inventory = await this.axios.request<MarketplaceInventory, MarketplaceInventory>(config);
+        return {
+            pagination: inventory.pagination,
+            items: inventory.listings.map((item) => {
+                return {
+                    artist: item.release.artist,
+                    title: item.release.title,
+                };
+            }),
+        };
+    }
+
+    async getCollection(username: string, page: number): Promise<Inventory> {
+        const config: AxiosRequestConfig = {
+            url: `users/${username}/collection/folders/0/releases`,
+            method: 'get',
+            params: { page, per_page: 100 },
+        };
+
+        const collection = await this.axios.request<CollectionInventory, CollectionInventory>(config);
+        return {
+            pagination: collection.pagination,
+            items: collection.releases.map((item) => {
+                return {
+                    artist: item.basic_information.artists[0].name,
+                    title: item.basic_information.title,
+                };
+            }),
+        };
     }
 }

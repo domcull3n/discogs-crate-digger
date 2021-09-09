@@ -7,7 +7,7 @@ export interface InventoryRequest {
     sort_order: string;
 }
 
-export interface Inventory {
+export interface MarketplaceInventory {
     pagination: Pagination;
     listings: Listing[];
 }

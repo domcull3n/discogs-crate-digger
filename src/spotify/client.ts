@@ -39,7 +39,6 @@ export default class SpotifyClient {
         const request: CreatePlaylistRequest = {
             collaborative: false,
             name: playlistName,
-            description: `Description of ${playlistName}`,
             public: false,
         };
 
@@ -50,6 +49,18 @@ export default class SpotifyClient {
         };
 
         return this.axios.request<CreatePlaylistResponse, CreatePlaylistResponse>(config);
+    }
+
+    async updatePlaylist(playlistId: string, description: string): Promise<void> {
+        const config: AxiosRequestConfig = {
+            url: `/v1/playlists/${playlistId}`,
+            method: 'put',
+            data: {
+                description,
+            },
+        };
+
+        return this.axios.request<void, void>(config);
     }
 
     async addItemsToPlaylist(playlistId: string, tracks: string[]): Promise<AddItemsToPlaylistResponse> {

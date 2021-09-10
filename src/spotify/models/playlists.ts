@@ -10,7 +10,7 @@ export interface CreatePlaylistRequest {
     name: string;
     public: boolean;
     collaborative: boolean;
-    description: string;
+    description?: string;
 }
 
 export interface CreatePlaylistResponse {
@@ -19,4 +19,5 @@ export interface CreatePlaylistResponse {
     name: string;
     type: string;
     uri: string;
+    description: string;
 }

@@ -15,7 +15,9 @@ program
         new Option(
             '--genres <genres...>',
             "genre's to pull out of the specified collection (only works with collections)",
-        ).choices(DiscogsMainGenres),
+        )
+            .choices(DiscogsMainGenres)
+            .default([]),
     )
 
     .action((username: string, options) => {
@@ -24,6 +26,7 @@ program
             console.error('Exiting...');
             return;
         }
+
         try {
             index({
                 username: username.toLowerCase(),

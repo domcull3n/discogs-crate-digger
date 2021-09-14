@@ -7,7 +7,7 @@ export enum InventoryType {
 export interface CommandOptions {
     username: string;
     inventoryType: InventoryType;
-    discogsGenres?: string[];
+    discogsGenres: string[];
 }
 
 export const DiscogsMainGenres = [

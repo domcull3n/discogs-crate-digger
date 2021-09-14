@@ -14,9 +14,9 @@ export default class Service {
         this.spotifyClient = new SpotifyClient(spotifyToken);
     }
 
-    async run(discogsUsername: string, inventoryType: InventoryType): Promise<void> {
+    async run(discogsUsername: string, inventoryType: InventoryType, genresToFilter: string[]): Promise<void> {
         const playlist = await this.createPlaylist(discogsUsername, inventoryType);
-        const inventory = await this.iterateInventory(discogsUsername, playlist, inventoryType, 1);
+        const inventory = await this.iterateInventory(discogsUsername, playlist, inventoryType, genresToFilter, 1);
         await this.updatePlaylistDescriptionWithMissingAlbums(playlist, inventory.pagination.items);
     }
 
@@ -27,20 +27,36 @@ export default class Service {
         return this.spotifyClient.createPlaylist(user.id, playlistName);
     }
 
+    private filterInventoryItems(inventory: Inventory, genresToFilter: string[]): InventoryItem[] {
+        return inventory.items.filter((listing) => {
+            const listingSet = new Set(listing.genres);
+            const genresSet = new Set(genresToFilter);
+            return listingSet.size === genresSet.size && [...genresSet].every((g) => listingSet.has(g));
+        });
+    }
+
     async iterateInventory(
         discogsUsername: string,
         playlist: CreatePlaylistResponse,
         inventoryType: InventoryType,
+        genresToFilter: string[],
         page: number,
     ): Promise<Inventory> {
         const inventory = await this.discogsClient.getInventory(discogsUsername, inventoryType, page);
+        const filteredInventoryItems = this.filterInventoryItems(inventory, genresToFilter);
 
-        for (const listing of inventory.items) {
+        for (const listing of filteredInventoryItems) {
             void (await this.addTracksFromListingIntoPlaylist(listing, playlist));
         }
 
         if (page < inventory.pagination.pages) {
-            await this.iterateInventory(discogsUsername, playlist, inventoryType, inventory.pagination.page + 1);
+            await this.iterateInventory(
+                discogsUsername,
+                playlist,
+                inventoryType,
+                genresToFilter,
+                inventory.pagination.page + 1,
+            );
         }
 
         return inventory;

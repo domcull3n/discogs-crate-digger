@@ -24,7 +24,7 @@ export default (commandOptions: CommandOptions): void => {
             if (token) {
                 const service = new Service(token);
                 void service
-                    .run(commandOptions.username, commandOptions.inventoryType)
+                    .run(commandOptions.username, commandOptions.inventoryType, commandOptions.discogsGenres)
                     .then(() => {
                         console.log(
                             `finished processing playlist for ${commandOptions.username} discogs ${commandOptions.inventoryType}`,

@@ -28,6 +28,8 @@ export default class Service {
     }
 
     private filterInventoryItems(inventory: Inventory, genresToFilter: string[]): InventoryItem[] {
+        if (genresToFilter.length === 0) return inventory.items;
+
         return inventory.items.filter((listing) => {
             const listingSet = new Set(listing.genres);
             const genresSet = new Set(genresToFilter);

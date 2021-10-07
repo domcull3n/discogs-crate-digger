@@ -13,5 +13,6 @@ export interface CollectionRelease {
         artists: {
             name: string;
         }[];
+        genres: string[];
     };
 }

@@ -53,6 +53,7 @@ export default class DiscogsClient {
                 return {
                     artist: item.release.artist,
                     title: item.release.title,
+                    genres: [],
                 };
             }),
         };
@@ -72,6 +73,7 @@ export default class DiscogsClient {
                 return {
                     artist: item.basic_information.artists[0].name,
                     title: item.basic_information.title,
+                    genres: item.basic_information.genres,
                 };
             }),
         };

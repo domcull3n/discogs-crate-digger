@@ -17,12 +17,19 @@ When using the command it will trigger an oauth flow with spotify asking for acc
 
 ```bash
 discogs-crate-digger <username>
+dcd <username>
 ```
 
-or
+To dig through a users collection instead of their marketplace you can use the collection flag
 
 ```bash
-dcd <username>
+dcd <username> --collection
+```
+
+You can also use genre filters on collections (but not on marketplaces)
+
+```bash
+dcd <username> --collection --genres Electronic Jazz
 ```
 
 [project-url]: https://github.com/domcull3n/discogs-crate-digger

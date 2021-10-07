@@ -8,4 +8,5 @@ export interface Inventory {
 export interface InventoryItem {
     artist: string;
     title: string;
+    genres: string[];
 }

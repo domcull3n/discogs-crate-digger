@@ -20,8 +20,8 @@ program
             .default([]),
     )
 
-    .action((username: string, options) => {
-        if (options.collection === undefined && options.genres !== undefined) {
+    .action((username: string, options: { collection: boolean | null, genres: string[]}) => {
+        if (options.collection === undefined && options.genres.length !== 0) {
             console.error("Genre's can't be specified with an marketplace, only an inventory");
             console.error('Exiting...');
             return;
